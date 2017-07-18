@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block static %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static 'ascii_chan/ascii_chan.css'%}">
+{% endblock %}
+
+{% block title %}
+<title>
+    Ascii_chan
+</title>
+{% endblock %}
+
+{% block content %}
+    <h2>/ascii/</h2>
+    <form method="post">
+        {% csrf_token %}
+        <label>Title
+            <input type="text" name="title" value="{{ title }}">
+        </label>
+        <br>
+        <label>Art
+            <textarea name="art">{{ art }}</textarea>
+        </label>
+        <br>
+        <input type="submit">
+    </form>
+    <div title="error" style="color:#ff0000">
+        {{ error }}
+    </div>
+    {% for item in arts %}
+        <div class="art-title">
+            {{ item }}
+        </div>
+        <pre class="art-body">
+            {{ item.art }}
+        </pre>
+            {{ item.created }}
+        <hr>
+    {% endfor %}
+
+{% endblock %}

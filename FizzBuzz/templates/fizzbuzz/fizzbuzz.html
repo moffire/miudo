@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Fizz Buzz</h2>
+<form method="get">
+    <input type="text" name="iter_number">
+    <button>Submit</button>
+</form>
+<ul>
+    {% for number in loop_range %}
+        <li>
+            {% if number|divisibleby:"3" %}
+                {{ number }}: Fizz
+            {% elif number|divisibleby:"5" %}
+                {{ number }}: Buzz
+            {% elif number|divisibleby:"3"|divisibleby:"5" %}
+                {{ number }}: {{ number }}
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

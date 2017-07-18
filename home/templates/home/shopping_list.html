@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Shopping list</h2>
+<form method="post">
+    {% csrf_token %}
+    <input name="city">
+    <button>Submit</button>
+</form>
+<h2>Shopping list</h2>
+<ul>
+    {% for row in rows %}
+    <li>
+        {{ row.0 }} {{ row.1 }} {{ row.2 }} {{ row.3 }} {{ row.4 }}
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

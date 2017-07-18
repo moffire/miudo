@@ -1,0 +1,28 @@
+h2 {
+color: green;
+}
+.error {
+color: red;
+}
+label {
+font-size: 20px;
+display: block;
+}
+input {
+width: 400px;
+}
+textarea {
+width: 400px;
+height: 400px;
+}
+.container {
+width: 400px;
+position: relative;
+margin-top: 20px;
+margin-bottom: 10px;
+}
+.column-left {
+float: left;
+margin-right: 30px;
+width: 170px;
+}

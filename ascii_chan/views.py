@@ -7,7 +7,7 @@ class AsciiView(View):
 
 
     def arts(self):
-        return list(Art.objects.all().order_by('-created'))
+        return Art.objects.all().order_by('-created')
 
     def get(self, request):
         return render(request, 'ascii_chan/ascii_chan.html', {'arts': self.arts()})

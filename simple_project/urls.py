@@ -18,6 +18,7 @@ from django.contrib import admin
 from home.views import FormView, ThanksHandler
 from FizzBuzz.views import FizzBuzz
 from ascii_chan.views import AsciiView
+from blog.views import Blog, New_Post
 
 
 
@@ -28,4 +29,7 @@ urlpatterns = [
     url(r'^thanks/(?P<id>\d+)/$', ThanksHandler.as_view()),
     url(r'^fizzbuzz/$', FizzBuzz.as_view()),
     url(r'^ascii_chan/$', AsciiView.as_view()),
+    url(r'^blog/$', Blog.as_view()),
+    url(r'^blog/(?P<id>\d+)/$', Blog.post_details),
+    url(r'^new_post/$', New_Post.as_view()),
 ]

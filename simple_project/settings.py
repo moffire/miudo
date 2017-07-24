@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+import secret
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,12 +21,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'b8+ncpu2gjyi+zl(whty#(gutm#!l)cavie_g0@#&j*=b57kz#'
+
+# SECRET_KEY = 'b8+ncpu2gjyi+zl(whty#(gutm#!l)cavie_g0@#&j*=b57kz#'
+SECRET_KEY = secret.get_secret_information("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost','127.0.0.1',]
 
 
 # Application definition
@@ -40,6 +43,7 @@ INSTALLED_APPS = [
     'home',
     'FizzBuzz',
     'ascii_chan',
+    'blog',
 ]
 
 MIDDLEWARE = [
@@ -80,8 +84,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'simple_project',
-        'USER': 'www-data',
-        'PASSWORD': 'password',
+        'USER': secret.get_secret_information("USER"),
+        'PASSWORD': secret.get_secret_information("PASSWORD"),
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }

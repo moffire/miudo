@@ -28,7 +28,7 @@ class New_Post(View):
         post_text = request.POST.get('text')
 
         if post_text and post_title:
-            Post.objects.create(title = post_title, text = post_text, post_publish_date = datetime.now())
-            return redirect('/blog/')
+            new_post = Post.objects.create(title = post_title, text = post_text, post_publish_date = datetime.now())
+            return redirect('/blog/{}/'.format(new_post.id))
         else:
             return render(request, 'blog/new_post.html', {'error': 'We need both title and some text.', 'title': post_title, 'text': post_text})

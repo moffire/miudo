@@ -26,7 +26,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = secret.get_secret_information("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = secret.debug_mode()
 
 ALLOWED_HOSTS = ['localhost','127.0.0.1','185.159.131.223',]
 
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'FizzBuzz',
     'ascii_chan',
     'blog',
+    'cookie_demo',
 ]
 
 MIDDLEWARE = [
@@ -130,4 +131,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = ['static',]
+STATIC_ROOT = os.path.join(BASE_DIR, '../static/')
 # TEMPLATE_DIRS = ['home/templates',]

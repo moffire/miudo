@@ -19,6 +19,7 @@ from home.views import FormView, ThanksHandler
 from FizzBuzz.views import FizzBuzz
 from ascii_chan.views import AsciiView
 from blog.views import Blog, New_Post
+from cookie_demo.views import Cookie
 
 
 
@@ -32,4 +33,5 @@ urlpatterns = [
     url(r'^blog/$', Blog.as_view()),
     url(r'^blog/(?P<id>\d+)/$', Blog.post_details),
     url(r'^new_post/$', New_Post.as_view()),
+    url(r'^cookie/$', Cookie.as_view()),
 ]

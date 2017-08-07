@@ -1,9 +1,10 @@
 import os, json
 
-def get_secret_information(argument):
+BASE_DIR = os.path.dirname(os.path.realpath(__file__))
+secret_file = os.path.join(BASE_DIR, 'secret_information.json')
+allowed_users = os.uname()[1]
 
-    BASE_DIR = os.path.dirname(os.path.realpath(__file__))
-    secret_file = os.path.join(BASE_DIR, 'secret_information.json')
+def get_secret_information(argument):
 
     try:
         with open(secret_file) as f:
@@ -16,5 +17,17 @@ def get_secret_information(argument):
                 "PASSWORD": database_settings[1],
             }
             return all_arguments.get(argument)
+    except FileNotFoundError:
+        return "File with information isn't found"
+
+
+def debug_mode():
+    try:
+        with open(secret_file) as f:
+            data = json.load(f)
+            if allowed_users in data['ALLOWED_USERS']:
+                return True
+            else:
+                return False
     except FileNotFoundError:
         return "File with information isn't found"

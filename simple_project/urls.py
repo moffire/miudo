@@ -20,6 +20,7 @@ from FizzBuzz.views import FizzBuzz
 from ascii_chan.views import AsciiView
 from blog.views import Blog, New_Post
 from cookie_demo.views import Cookie
+from csrf.views import CSRF
 
 
 
@@ -34,4 +35,5 @@ urlpatterns = [
     url(r'^blog/(?P<id>\d+)/$', Blog.post_details),
     url(r'^new_post/$', New_Post.as_view()),
     url(r'^cookie/$', Cookie.as_view()),
+    url(r'^csrf/$', CSRF.as_view())
 ]

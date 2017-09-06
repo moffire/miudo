@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse
 from django.views import View
-import hashlib, hmac
+import hashlib, hmac, binascii, random
 from django.conf import settings
 
 
@@ -22,8 +22,6 @@ class Cookie(View):
             return fig
         else:
             return None
-
-
 
     def get(self, request):
 
@@ -49,4 +47,22 @@ class Cookie(View):
 
         return response
 
+    def make_salt(self):
+
+        characters = []
+        SALT_LENTH = 5
+
+        for char in range(SALT_LENTH):
+            characters.append(random.choice('abcdefghijk'))
+
+        return ''.join(characters)
+
+
+    def make_pw_hash(self, pw):
+
+        salt = self.make_salt()
+        hash_byte = hashlib.pbkdf2_hmac('sha256', pw.encode('utf-8'), salt.encode('utf-8'), 100000)
+        hash_str = binascii.hexlify(hash_byte).decode()
+
+        return ','.join([hash_str, salt])
 

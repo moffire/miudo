@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'blog',
     'cookie_demo',
     'csrf',
+    'registration',
 ]
 
 MIDDLEWARE = [

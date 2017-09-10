@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from .models import Art
-
+# google-maps API AIzaSyAaBupiwy7RA2R8ARNfAcsoMQ3Baopq2_I
 
 class AsciiView(View):
 

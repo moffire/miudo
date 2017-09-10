@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Registration</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <style type="text/css">
+    </style>
+</head>
+<body>
+	<div class="container">
+        <div class="row">
+                <!-- Form Name -->
+                <div class="alert">
+                  <strong style="color:#FF0000">{{ error_form }}</strong>
+                  <strong style="color:#FF0000">{{ error_password }}</strong>
+                  <strong style="color:#FF0000">{{ user_exists }}</strong>
+                </div>
+            <form class="form-horizontal" method="post">
+                <!-- Text input-->
+                <div class="form-group">
+                  <label class="col-md-4 control-label">Name</label>
+                  <div class="col-md-4">
+                  <input name="name" placeholder="Insert your Name. Should contain more than 3 charcters" class="form-control input-md" type="text" value="{{ name }}">
+                  <span class="help-block"> </span>
+                  </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                  <label class="col-md-4 control-label">Email</label>
+                  <div class="col-md-4">
+                  <input  name="email" placeholder="Insert your Email" class="form-control input-md"  type="text" value="{{ email }}">
+                  <span class="help-block"> </span>
+                  </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                  <label class="col-md-4 control-label">Password</label>
+                  <div class="col-md-4">
+                  <input name="password" placeholder="Insert your Password" class="form-control input-md" type="password" value="{{ password }}">
+                  <span class="help-block"> </span>
+                  </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                  <label class="col-md-4 control-label">Confirm Password</label>
+                  <div class="col-md-4">
+                  <input name="confirm_password" placeholder="Confirm your Password" class="form-control input-md" type="password" value="{{ confirm_password }}">
+                  <span class="help-block"> </span>
+                  </div>
+                </div>
+
+                <!-- Button -->
+                <div class="form-group">
+                  <label class="col-md-4 control-label"> </label>
+                  <div class="col-md-4">
+                    <button class="btn btn-primary">Submit</button>
+                  </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

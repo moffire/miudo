@@ -38,6 +38,6 @@ urlpatterns = [
     url(r'^cookie/$', Cookie.as_view()),
     url(r'^csrf/$', CSRF.as_view()),
     url(r'^testform/$', reward, name='testform'),
-    url(r'^registration/$', MainForm.as_view()),
+    url(r'^registration', MainForm.as_view()),
     url(r'^welcome/$', LoginForm.as_view()),
 ]

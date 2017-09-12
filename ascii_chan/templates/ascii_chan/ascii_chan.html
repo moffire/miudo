@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "ascii_chan/base.html" %}
 {% load static %}
 
 {% block static %}
@@ -39,5 +39,6 @@
             {{ item.created }}
         <hr>
     {% endfor %}
+coords: {{ coords }}
 
 {% endblock %}

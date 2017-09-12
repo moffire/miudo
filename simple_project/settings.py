@@ -28,7 +28,7 @@ SECRET_KEY = secret.get_secret_information("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = secret.debug_mode()
 
-ALLOWED_HOSTS = ['localhost','127.0.0.1','185.159.131.223',]
+ALLOWED_HOSTS = ['localhost','127.0.0.1','185.159.131.223','514ed348.ngrok.io']
 
 
 # Application definition
@@ -122,7 +122,6 @@ LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
-
 USE_L10N = True
 
 USE_TZ = True

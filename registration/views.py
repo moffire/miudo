@@ -11,23 +11,15 @@ class Cookie_Hash_Mixin():
 
         hash = hmac.new(settings.SECRET_KEY.encode('utf-8'), str(id_cookie).encode('utf-8'), 'md5').hexdigest()
         return '{},{}'.format(id_cookie, hash)
-        # return id_cookie, hash
+
 
     def check_cookie_hash(self, cookie_hash):
 
-        # try:
-        id , _ = cookie_hash.split(',')
-        # except (ValueError, AttributeError):
-        #     return None
-
-        # est_cookie = self.make_cookie_hash(id)
-        # new_hash = est_cookie.split(',')
+        id , _ = cookie_hash.split('.')
         new_hash = self.make_cookie_hash(id)
 
         if new_hash == cookie_hash:
             return True
-        else:
-            return None
 
 class MainForm(Cookie_Hash_Mixin, View):
 
@@ -98,8 +90,10 @@ class LoginForm(Cookie_Hash_Mixin, View):
     def get(self, request):
 
         id, _ = request.COOKIES.get('id').split(',')
-        user_name = User.objects.get(id = id).name
-        if Cookie_Hash_Mixin.check_cookie_hash(self, request.COOKIES.get('id')):
-            return render(request, 'registration/welcome.html', {'name': user_name})
+        if User.objects.filter(id = id).exists():
+            if Cookie_Hash_Mixin.check_cookie_hash(self, request.COOKIES.get('id')):
+                return render(request, 'registration/welcome.html', {'name': User.objects.get(id = id).name})
+            else:
+                return redirect('/registration/')
         else:
-            render(request, 'registration/registration.html')
+            return redirect('/registration/')

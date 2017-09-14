@@ -28,7 +28,7 @@ SECRET_KEY = secret.get_secret_information("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = secret.debug_mode()
 
-ALLOWED_HOSTS = ['localhost','127.0.0.1','185.159.131.223','514ed348.ngrok.io']
+ALLOWED_HOSTS = ['159.203.45.162','127.0.0.1',]
 
 
 # Application definition

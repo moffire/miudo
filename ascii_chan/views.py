@@ -4,7 +4,7 @@ from .models import Art
 import urllib, json
 from random import uniform
 from django.conf import settings
-# google-maps API AIzaSyAaBupiwy7RA2R8ARNfAcsoMQ3Baopq2_I
+# google-maps API AIzaSyDdbE5O_wI9RyFNYzii-8ARBIrcqVXwyZ8
 
 class AsciiView(View):
 
@@ -26,10 +26,21 @@ class AsciiView(View):
                 coords.append((post.lat, post.lon))
         return all_posts
 
+    def prepare_points(self, arts):
+
+        coords = ''
+
+        for art in arts:
+            if art.lat and art.lon:
+                coords += art.lat + ',' + art.lon + '|'
+
+        coords_without_last_pipe = coords[:-1]
+        google_row = 'https://maps.googleapis.com/maps/api/staticmap?size=400x400&maptype=roadmap&markers={}&key=AIzaSyDdbE5O_wI9RyFNYzii-8ARBIrcqVXwyZ8'.format(coords_without_last_pipe)
+        return google_row
+
     def get(self, request):
-        ip = '208.80.152.201'
-        coords = self.getcoords(ip)
-        return render(request, 'ascii_chan/ascii_chan.html', {'arts': self.arts(), 'coords': coords})
+        arts = Art.objects.all()
+        return render(request, 'ascii_chan/ascii_chan.html', {'arts': self.arts(), 'map_url': self.prepare_points(arts)})
 
 
     def get_random_lon(self):

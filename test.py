@@ -1,38 +1,36 @@
-import hashlib, binascii
-import random
+import time
+# complex_computation() simulates a slow function.
+# time.sleep(n) causes the
+# program to pause for n seconds.
+# In real life, this might be a call to a
+# database, or a request to another web service.
+def complex_computation(a, b):
+    time.sleep(.5)
+    return a + b
 
-def make_salt():
+# QUIZ - Improve the cached_computation()
+# function below so that it caches
+# results after computing them for the first
+# time so future calls are faster
+cache = {}
+def cached_computation(a, b):
+    key = (a,b)
+    if key in cache.keys():
+        return cache[key]
+    else:
+        computation = complex_computation(a,b)
+        cache[key] = computation
+        return computation
 
-    characters = []
-    SALT_LENTH = 5
 
-    for char in range(SALT_LENTH):
-        characters.append(random.choice('abcdefghijk'))
+cached_computation(5,10)
 
-    return ''.join(characters)
-
-
-def make_pw_hash(pw, salt=None):
-
-    if not salt:
-        salt = make_salt()
-    hash_byte = hashlib.pbkdf2_hmac('sha256', pw.encode('utf-8'), salt.encode('utf-8'), 100000)
-    hash_str = binascii.hexlify(hash_byte).decode()
-
-    return ','.join([hash_str, salt])
-
-name = 'Alexey'
-pw = '123'
-hash = 'c519464c0e4f3a7310b8d4eb40a1f6956f03edca455a014247da29c3bc873548,gikac'
-
-def valid_pw(name, pw, hash):
-
-    _, salt = hash.split(',')
-    hash_for_compare = make_pw_hash(pw, salt)
-
-    return hash_for_compare == hash
-
-print(valid_pw(name, pw, hash))
-#       отрезать соль из хэша
-#       передать в make_pw_hash
-#       захэшировать с полученной солью
+start_time = time.time()
+print(cached_computation(5, 3))
+first_time = time.time() - start_time
+print("The first computation took {} seconds./n".format(first_time))
+start_time2 = time.time()
+print(cached_computation(5, 3))
+second_time = time.time() - start_time2
+print("The second computation took {} seconds./n".format(second_time))
+print("Result: {} times less".format(first_time/second_time))

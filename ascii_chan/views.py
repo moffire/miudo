@@ -4,7 +4,22 @@ from .models import Art
 import urllib, json
 from random import uniform
 from django.conf import settings
+import time
 # google-maps API AIzaSyDdbE5O_wI9RyFNYzii-8ARBIrcqVXwyZ8
+
+
+cache = {}
+
+def get_arts(update=False):
+    KEY = 'arts'
+    if (KEY in cache) and (update == False):
+        return cache[KEY]
+    else:
+        all_posts = Art.objects.all().order_by('-created')
+        time.sleep(3)
+        cache[KEY] = all_posts
+        print('Db query')
+        return all_posts
 
 class AsciiView(View):
 
@@ -19,7 +34,8 @@ class AsciiView(View):
             return json_content['lat'], json_content['lon']
 
     def arts(self):
-        all_posts = Art.objects.all().order_by('-created')
+        # all_posts = Art.objects.all().order_by('-created')
+        all_posts = get_arts()
         coords = []
         for post in all_posts:
             if post.lat and post.lon:
@@ -57,6 +73,8 @@ class AsciiView(View):
         lat, lon = self.getcoords(ip)
         if title and art:
             Art.objects.create(title = title, art = art, lat = lat, lon = lon)
+            get_arts(update=True)
             return redirect('/ascii_chan/')
         else:
             return render(request, 'ascii_chan/ascii_chan.html', {'error':'We need both title and some text.', 'art': art, 'title': title, 'arts': self.arts()})
+

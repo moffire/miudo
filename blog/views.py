@@ -1,7 +1,9 @@
-from django.shortcuts import render, redirect, get_object_or_404, render_to_response
+from django.shortcuts import render, redirect, get_object_or_404, render_to_response, HttpResponse
 from django.views import View
 from .models import Post
 from datetime import datetime
+from django.core import serializers
+import json
 
 class Blog(View):
 
@@ -32,3 +34,18 @@ class New_Post(View):
             return redirect('/blog/{}/'.format(new_post.id))
         else:
             return render(request, 'blog/new_post.html', {'error': 'We need both title and some text.', 'title': post_title, 'text': post_text})
+
+class Json_all_posts(View):
+
+    # title
+    # text
+    # post_publish_date
+
+    def get(self, request):
+
+        all_data = serializers.serialize('python', Post.objects.all())
+        all_posts = [field['fields'] for field in all_data]
+        output = json.dumps(all_posts)
+
+
+        return HttpResponse(output, content_type='application/json')

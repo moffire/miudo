@@ -18,7 +18,7 @@ from django.contrib import admin
 from home.views import FormView, ThanksHandler
 from FizzBuzz.views import FizzBuzz
 from ascii_chan.views import AsciiView
-from blog.views import Blog, New_Post
+from blog.views import Blog, New_Post, Json_all_posts
 from cookie_demo.views import Cookie
 from csrf.views import CSRF, reward
 from registration.views import MainForm, LoginForm
@@ -44,4 +44,5 @@ urlpatterns = [
     url(r'^login/$', Login.as_view()),
     url(r'^welcome_login/$', Check_Cookie.as_view()),
     url(r'^logout/$', Logout.as_view()),
+    url(r'^blog/\.json/$', Json_all_posts.as_view()),
 ]
